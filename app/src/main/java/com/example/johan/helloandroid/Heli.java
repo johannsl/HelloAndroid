@@ -13,7 +13,7 @@ import sheep.input.Touch;
  */
 
 public class Heli extends Sprite {
-    
+
     private final int VELOCITY = 100;
     private boolean moveRight;
     private boolean moveLeft;
@@ -29,9 +29,6 @@ public class Heli extends Sprite {
         moveLeft = false;
         moveUp = false;
         moveDown = true;
-        height = MyGame.height;
-        width = MyGame.width;
-        System.out.println("####################### " + height + " ### " + width);
     }
 
     public void update(float dt) {
@@ -40,7 +37,7 @@ public class Heli extends Sprite {
             setScale(-1, 1);
             float x = getX();
             float y = getY();
-            if (!(x >= width)) {
+            if (!(x >= MyGame.width)) {
                 float dx = dt * VELOCITY;
                 setPosition(x + dx, y);
             }
@@ -77,7 +74,7 @@ public class Heli extends Sprite {
         if (moveDown) {
             float x = getX();
             float y = getY();
-            if (!(y >= height)) {
+            if (!(y >= MyGame.height)) {
                 float dy = dt * VELOCITY;
                 setPosition(x, y + dy);
             }

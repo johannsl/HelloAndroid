@@ -12,7 +12,7 @@ import sheep.math.BoundingBox;
  * Created by johan on 27/01/17.
  */
 
-public class GameLayer extends Layer implements TouchListener{
+public class GameLayer extends Layer {
 
     private Heli heli1;
 
@@ -28,7 +28,7 @@ public class GameLayer extends Layer implements TouchListener{
         heli1.update(dt);
     }
 
-    public boolean onTouchDown(MotionEvent event) {
-
+    public Heli getHeli() {
+        return heli1;
     }
 }
