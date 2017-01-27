@@ -13,7 +13,7 @@ import sheep.graphics.Image;
 
 public class Heli extends Sprite {
 
-    private final int VELOCITY = 300;
+    private final int VELOCITY = 100;
     private boolean moveRight;
     private boolean moveLeft;
     private boolean moveUp;
@@ -24,12 +24,13 @@ public class Heli extends Sprite {
     public Heli(Image image) {
         super(image);
         setPosition(200, 200);
-        moveRight = true;
+        moveRight = false;
         moveLeft = false;
         moveUp = false;
-        moveDown = false;
+        moveDown = true;
         height = MyGame.height;
         width = MyGame.width;
+        System.out.println("####################### " + height + " ### " + width);
     }
 
     public void update(float dt) {
@@ -63,14 +64,26 @@ public class Heli extends Sprite {
         if (moveUp) {
             float x = getX();
             float y = getY();
-            float dy = dt * VELOCITY;
-            setPosition(x, y - dy);
+            if (!(y <= 0)) {
+                float dy = dt * VELOCITY;
+                setPosition(x, y - dy);
+            }
+            else {
+                moveUp = false;
+                moveDown = true;
+            }
         }
         if (moveDown) {
             float x = getX();
             float y = getY();
-            float dy = dt * VELOCITY;
-            setPosition(x, y + dy);
+            if (!(y >= height)) {
+                float dy = dt * VELOCITY;
+                setPosition(x, y + dy);
+            }
+            else {
+                moveDown = false;
+                moveUp = true;
+            }
         }
     }
 }
