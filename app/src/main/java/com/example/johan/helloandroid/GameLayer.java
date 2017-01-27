@@ -1,16 +1,18 @@
 package com.example.johan.helloandroid;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import sheep.game.Layer;
 import sheep.graphics.Image;
+import sheep.input.TouchListener;
 import sheep.math.BoundingBox;
 
 /**
  * Created by johan on 27/01/17.
  */
 
-public class GameLayer extends Layer {
+public class GameLayer extends Layer implements TouchListener{
 
     private Heli heli1;
 
@@ -24,5 +26,9 @@ public class GameLayer extends Layer {
 
     public void update(float dt) {
         heli1.update(dt);
+    }
+
+    public boolean onTouchDown(MotionEvent event) {
+
     }
 }

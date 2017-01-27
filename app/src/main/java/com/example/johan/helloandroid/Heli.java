@@ -6,13 +6,14 @@ import android.view.Display;
 
 import sheep.game.Sprite;
 import sheep.graphics.Image;
+import sheep.input.Touch;
 
 /**
  * Created by johan on 27/01/17.
  */
 
 public class Heli extends Sprite {
-
+    
     private final int VELOCITY = 100;
     private boolean moveRight;
     private boolean moveLeft;
@@ -85,5 +86,22 @@ public class Heli extends Sprite {
                 moveUp = true;
             }
         }
+    }
+
+    public void setMoveRight() {
+        moveRight = true;
+        moveLeft = false;
+    }
+    public void setMoveLeft() {
+        moveLeft = true;
+        moveRight = false;
+    }
+    public void setMoveUp() {
+        moveUp = true;
+        moveDown = false;
+    }
+    public void setMoveDown() {
+        moveDown = true;
+        moveUp = false;
     }
 }
