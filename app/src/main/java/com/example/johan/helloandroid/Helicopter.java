@@ -1,12 +1,14 @@
 package com.example.johan.helloandroid;
 
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
 
 import sheep.game.Sprite;
 import sheep.graphics.Color;
 import sheep.graphics.Font;
 import sheep.graphics.Image;
+import sheep.graphics.SpriteView;
 
 /**
  * Created by johan on 27/01/17.
@@ -15,14 +17,21 @@ import sheep.graphics.Image;
 public class Helicopter extends Sprite {
 
     private final int VELOCITY = 200;
+    private Image[] images;
     private float[] vector;
     private Font font;
+    private float timer;
+    private int frame;
 
     public Helicopter(Image image) {
         super(image);
+        images = new Image[] {image, new Image(R.drawable.heli2), new Image(R.drawable.heli2),
+                new Image(R.drawable.heli3)};
         setPosition(1000, 1000);
         vector = new float[] {1f, 0f};
         font = new Font(0, 0, 0, (MyGame.width * 0.04f), Typeface.SANS_SERIF, Typeface.NORMAL);
+        timer = 0;
+        frame = 1;
     }
 
     @Override
@@ -37,9 +46,19 @@ public class Helicopter extends Sprite {
     @Override
     public void update(float dt) {
         super.update(dt);
+        updateImage(dt);
         checkWallCollision();
         setImageDirection();
         moveHelicopter(dt);
+    }
+
+    private void updateImage(float dt) {
+        timer += dt;
+        if (timer >= 0.1) {
+            setView((SpriteView)images[frame]);
+            timer = 0;
+            frame = (frame + 1) % images.length;
+        }
     }
 
     private void setImageDirection() {

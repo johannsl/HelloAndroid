@@ -28,7 +28,7 @@ public class GameState extends State implements TouchListener {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawColor(Color.BLUE);
+        canvas.drawColor(Color.MAGENTA);
         gameWorld.draw(canvas);
     }
 
