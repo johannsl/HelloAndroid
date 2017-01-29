@@ -29,21 +29,22 @@ public class GameState extends State implements TouchListener {
         this.addKeyboardListener(this);
     }
 
+    @Override
     public void draw(Canvas canvas) {
         canvas.drawColor(Color.BLUE);
         gameWorld.draw(canvas);
     }
 
+    @Override
     public void update(float dt) {
         gameWorld.update(dt);
     }
 
     public boolean onTouchDown(MotionEvent event){
-        float x = event.getX();
-        float y = event.getY();
-
-
-
+        float[] vector = new float[2];
+        vector[0] = event.getX();
+        vector[1] = event.getY();
+        gameLayer.getHeli().setVector(vector);
         return true;
     }
 }

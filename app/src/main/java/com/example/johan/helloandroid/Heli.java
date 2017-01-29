@@ -2,7 +2,10 @@ package com.example.johan.helloandroid;
 
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.view.Display;
+
+import java.util.ArrayList;
 
 import sheep.game.Sprite;
 import sheep.graphics.Image;
@@ -15,90 +18,55 @@ import sheep.input.Touch;
 public class Heli extends Sprite {
 
     private final int VELOCITY = 100;
-    private boolean moveRight;
-    private boolean moveLeft;
-    private boolean moveUp;
-    private boolean moveDown;
-    public static int height;
-    public static int width;
+    //private ArrayList<Float> vector;
+    private float posX;
+    private float posY;
+    private float[] vector;
 
     public Heli(Image image) {
         super(image);
         setPosition(200, 200);
-        moveRight = false;
-        moveLeft = false;
-        moveUp = false;
-        moveDown = true;
+        vector = new float[2];
     }
 
+    @Override
     public void update(float dt) {
         super.update(dt);
-        if (moveRight) {
-            setScale(-1, 1);
-            float x = getX();
-            float y = getY();
-            if (!(x >= MyGame.width)) {
-                float dx = dt * VELOCITY;
-                setPosition(x + dx, y);
-            }
-            else {
-                moveRight = false;
-                moveLeft = true;
-            }
-        }
-        if (moveLeft) {
-            setScale(1, 1);
-            float x = getX();
-            float y = getY();
-            if (!(x <= 0)) {
-                float dx = dt * VELOCITY;
-                setPosition(x - dx, y);
-            }
-            else {
-                moveLeft = false;
-                moveRight = true;
-            }
-        }
-        if (moveUp) {
-            float x = getX();
-            float y = getY();
-            if (!(y <= 0)) {
-                float dy = dt * VELOCITY;
-                setPosition(x, y - dy);
-            }
-            else {
-                moveUp = false;
-                moveDown = true;
-            }
-        }
-        if (moveDown) {
-            float x = getX();
-            float y = getY();
-            if (!(y >= MyGame.height)) {
-                float dy = dt * VELOCITY;
-                setPosition(x, y + dy);
-            }
-            else {
-                moveDown = false;
-                moveUp = true;
-            }
-        }
+
     }
 
-    public void setMoveRight() {
-        moveRight = true;
-        moveLeft = false;
+    public void setVector(float[] vector) {
+        for (float element : vector){
+            System.out.println("VECTOR ###### " + element);
+        }
+        float[] normalized = normalize(vector);
+        for (float element : normalized){
+            System.out.println("NORM ###### " + element);
+        }
+        float[] centralized = centralize(vector);
+        for (float element : centralized){
+            System.out.println("CENTR ###### " + element);
+        }
+
+        this.vector = normalized;
+        return;
     }
-    public void setMoveLeft() {
-        moveLeft = true;
-        moveRight = false;
+
+    private float[] centralize(float[] vector) {
+        float[] centralized = new float[2];
+        centralized[0] = vector[0] - (MyGame.width / 2);
+        centralized[1] = vector[1] - (MyGame.height / 2);
+        System.out.println(centralized);
+        return centralized;
     }
-    public void setMoveUp() {
-        moveUp = true;
-        moveDown = false;
+
+    private float[] normalize(float[] vector) {
+        float[] normalized = new float[2];
+        normalized[0] = vector[0] / (vector[0] + vector[1]);
+        normalized[1] = vector[1] / (vector[0] + vector[1]);
+        System.out.println(normalized);
+        return normalized;
     }
-    public void setMoveDown() {
-        moveDown = true;
-        moveUp = false;
-    }
+
+
 }

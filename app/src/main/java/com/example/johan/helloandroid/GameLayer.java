@@ -20,10 +20,12 @@ public class GameLayer extends Layer {
         heli1 = new Heli(new Image(R.drawable.heli1));
     }
 
+    @Override
     public void draw(Canvas canvas, BoundingBox box) {
         heli1.draw(canvas);
     }
 
+    @Override
     public void update(float dt) {
         heli1.update(dt);
     }
