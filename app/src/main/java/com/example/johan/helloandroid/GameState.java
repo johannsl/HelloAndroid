@@ -4,17 +4,12 @@ package com.example.johan.helloandroid;
  * Created by johan on 26/01/17.
  */
 
-import sheep.game.Sprite;
 import sheep.game.State;
 import sheep.game.World;
-import sheep.graphics.Image;
-import sheep.input.KeyboardListener;
-import sheep.input.Touch;
 import sheep.input.TouchListener;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
 public class GameState extends State implements TouchListener {

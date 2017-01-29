@@ -1,6 +1,11 @@
 package com.example.johan.helloandroid;
 
+import android.graphics.Canvas;
+import android.graphics.Typeface;
+
 import sheep.game.Sprite;
+import sheep.graphics.Color;
+import sheep.graphics.Font;
 import sheep.graphics.Image;
 
 /**
@@ -9,13 +14,24 @@ import sheep.graphics.Image;
 
 public class Helicopter extends Sprite {
 
-    private final int VELOCITY = 1000;
+    private final int VELOCITY = 200;
     private float[] vector;
+    private Font font;
 
     public Helicopter(Image image) {
         super(image);
         setPosition(1000, 1000);
         vector = new float[] {1f, 0f};
+        font = new Font(0, 0, 0, (MyGame.width * 0.04f), Typeface.SANS_SERIF, Typeface.NORMAL);
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        canvas.drawText("X Coordinate: " + Math.round(getX() * 100) / 100,
+                (MyGame.width * 0.65f), (MyGame.height * 0.03f), font);
+        canvas.drawText("Y Coordinate: " + Math.round(getY() * 100) / 100,
+                (MyGame.width * 0.65f), (MyGame.height * 0.06f), font);
     }
 
     @Override
