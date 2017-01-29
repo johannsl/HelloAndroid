@@ -21,12 +21,14 @@ public class GameState extends State implements TouchListener {
 
     private World gameWorld;
     private GameLayer gameLayer;
+    private float[] coordinates;
 
     public GameState() {
         gameWorld = new World();
         gameLayer = new GameLayer();
         gameWorld.addLayer(gameLayer);
         this.addKeyboardListener(this);
+        coordinates = new float[2];
     }
 
     @Override
@@ -41,10 +43,9 @@ public class GameState extends State implements TouchListener {
     }
 
     public boolean onTouchDown(MotionEvent event){
-        float[] vector = new float[2];
-        vector[0] = event.getX();
-        vector[1] = event.getY();
-        gameLayer.getHeli().setVector(vector);
+        coordinates[0] = event.getX();
+        coordinates[1] = event.getY();
+        gameLayer.getHelicopter().setVector(coordinates);
         return true;
     }
 }

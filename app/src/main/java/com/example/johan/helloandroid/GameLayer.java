@@ -14,23 +14,23 @@ import sheep.math.BoundingBox;
 
 public class GameLayer extends Layer {
 
-    private Heli heli1;
+    private Helicopter helicopter;
 
     public GameLayer() {
-        heli1 = new Heli(new Image(R.drawable.heli1));
+        helicopter = new Helicopter(new Image(R.drawable.heli1));
     }
 
     @Override
     public void draw(Canvas canvas, BoundingBox box) {
-        heli1.draw(canvas);
+        helicopter.draw(canvas);
     }
 
     @Override
     public void update(float dt) {
-        heli1.update(dt);
+        helicopter.update(dt);
     }
 
-    public Heli getHeli() {
-        return heli1;
+    public Helicopter getHelicopter() {
+        return helicopter;
     }
 }
