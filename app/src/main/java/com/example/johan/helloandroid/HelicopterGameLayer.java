@@ -13,13 +13,13 @@ import sheep.math.BoundingBox;
  * Created by johan on 27/01/17.
  */
 
-public class GameLayer extends Layer {
+public class HelicopterGameLayer extends Layer {
 
     private Helicopter[] helicopters;
 
-    public GameLayer() {
-        helicopters = new Helicopter[4];
-        for (int i=0; i<4; i++) {
+    public HelicopterGameLayer() {
+        helicopters = new Helicopter[2];
+        for (int i=0; i<2; i++) {
             helicopters[i] = new Helicopter(new Image(R.drawable.heli1));
         }
         helicopters[0].setMainHelicopter();

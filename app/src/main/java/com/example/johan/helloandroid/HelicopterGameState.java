@@ -12,17 +12,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.MotionEvent;
 
-public class GameState extends State implements TouchListener {
+public class HelicopterGameState extends State implements TouchListener {
 
     private World gameWorld;
-    private GameLayer gameLayer;
+    private HelicopterGameLayer gameLayer;
     private float[] coordinates;
 
-    public GameState() {
+    public HelicopterGameState() {
         gameWorld = new World();
-        gameLayer = new GameLayer();
+        gameLayer = new HelicopterGameLayer();
         gameWorld.addLayer(gameLayer);
-        this.addKeyboardListener(this);
         coordinates = new float[2];
     }
 
@@ -37,6 +36,7 @@ public class GameState extends State implements TouchListener {
         gameWorld.update(dt);
     }
 
+    @Override
     public boolean onTouchDown(MotionEvent event){
         coordinates[0] = event.getX();
         coordinates[1] = event.getY();

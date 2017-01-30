@@ -23,7 +23,7 @@ public class MyGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         findScreenMetrics();
         Game game = new Game(this, null);
-        game.pushState(new GameState());
+        game.pushState(new MenuState());
         setContentView(game);
     }
 
