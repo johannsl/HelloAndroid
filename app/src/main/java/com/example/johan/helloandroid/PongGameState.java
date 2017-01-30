@@ -16,13 +16,12 @@ public class PongGameState extends State implements TouchListener {
 
     private World gameWorld;
     private PongGameLayer gameLayer;
-    private float[] coordinates;
+    private float direction;
 
     public PongGameState() {
         gameWorld = new World();
         gameLayer = new PongGameLayer();
         gameWorld.addLayer(gameLayer);
-        coordinates = new float[2];
     }
 
     @Override
@@ -36,6 +35,14 @@ public class PongGameState extends State implements TouchListener {
 
     @Override
     public boolean onTouchDown(MotionEvent event) {
+        direction = event.getY();
+        gameLayer.getPaddle().setMovementDirection(direction);
+        return true;
+    }
+
+    @Override
+    public boolean onTouchUp(MotionEvent event) {
+        gameLayer.getPaddle().stopMovementDirection();
         return true;
     }
 
