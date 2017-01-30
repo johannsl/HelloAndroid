@@ -18,8 +18,8 @@ public class GameLayer extends Layer {
     private Helicopter[] helicopters;
 
     public GameLayer() {
-        helicopters = new Helicopter[2];
-        for (int i=0; i<2; i++) {
+        helicopters = new Helicopter[4];
+        for (int i=0; i<4; i++) {
             helicopters[i] = new Helicopter(new Image(R.drawable.heli1));
         }
         helicopters[0].setMainHelicopter();
@@ -34,24 +34,21 @@ public class GameLayer extends Layer {
 
     @Override
     public void update(float dt) {
-        checkCollisions();
         for (Helicopter helicopter : helicopters) {
+            checkCollisions(helicopter);
             helicopter.update(dt);
         }
     }
 
-    private void checkCollisions() {
-        for (Helicopter helicopter : helicopters) {
-            for (Helicopter helicopter1 : helicopters) {
-                if (helicopter != helicopter1 && helicopter.collides(helicopter1)) {
-                    helicopter.collide(helicopter1);
-                    //break;
-                }
+    private void checkCollisions(Helicopter helicopter) {
+        for (Helicopter helicopter1 : helicopters) {
+            if (helicopter != helicopter1 && helicopter.collides(helicopter1)) {
+                helicopter.collide(helicopter1);
             }
         }
     }
 
-    public Helicopter getHelicopter() {
+    public Helicopter getMainHelicopter() {
         return helicopters[0];
     }
 }

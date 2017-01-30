@@ -40,7 +40,7 @@ public class GameState extends State implements TouchListener {
     public boolean onTouchDown(MotionEvent event){
         coordinates[0] = event.getX();
         coordinates[1] = event.getY();
-        gameLayer.getHelicopter().setDirection(coordinates);
+        gameLayer.getMainHelicopter().setDirection(coordinates);
         return true;
     }
 }
