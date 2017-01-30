@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import sheep.game.Layer;
+import sheep.game.Sprite;
 import sheep.graphics.Image;
 import sheep.input.TouchListener;
 import sheep.math.BoundingBox;
@@ -14,23 +15,43 @@ import sheep.math.BoundingBox;
 
 public class GameLayer extends Layer {
 
-    private Helicopter helicopter;
+    private Helicopter[] helicopters;
 
     public GameLayer() {
-        helicopter = new Helicopter(new Image(R.drawable.heli1));
+        helicopters = new Helicopter[2];
+        for (int i=0; i<2; i++) {
+            helicopters[i] = new Helicopter(new Image(R.drawable.heli1));
+        }
+        helicopters[0].setMainHelicopter();
     }
 
     @Override
     public void draw(Canvas canvas, BoundingBox box) {
-        helicopter.draw(canvas);
+        for (Helicopter helicopter : helicopters) {
+            helicopter.draw(canvas);
+        }
     }
 
     @Override
     public void update(float dt) {
-        helicopter.update(dt);
+        checkCollisions();
+        for (Helicopter helicopter : helicopters) {
+            helicopter.update(dt);
+        }
+    }
+
+    private void checkCollisions() {
+        for (Helicopter helicopter : helicopters) {
+            for (Helicopter helicopter1 : helicopters) {
+                if (helicopter != helicopter1 && helicopter.collides(helicopter1)) {
+                    helicopter.collide(helicopter1);
+                    //break;
+                }
+            }
+        }
     }
 
     public Helicopter getHelicopter() {
-        return helicopter;
+        return helicopters[0];
     }
 }
