@@ -16,36 +16,39 @@ import sheep.math.BoundingBox;
 
 public class PongGameLayer extends Layer {
 
-    private Paddle paddle;
-    private Paddle computerPaddle;
+    //private Paddle paddle;
+    //private Paddle computerPaddle;
+    private ControlPaddle controlPaddle;
+    private ComputerPaddle computerPaddle;
     private static Ball ball;
 
     public PongGameLayer() {
-        paddle = new Paddle(new Image(R.drawable.paddle));
-        computerPaddle = new Paddle(new Image(R.drawable.paddle));
-        computerPaddle.isBot = true;
-        computerPaddle.setMovementDirection(0f);
-        computerPaddle.setPosition(MyGame.width * 0.985f, MyGame.height * 0.5f);
+        //paddle = new Paddle(new Image(R.drawable.paddle));
+        controlPaddle = new ControlPaddle(new Image(R.drawable.paddle));
+        computerPaddle = new ComputerPaddle(new Image(R.drawable.paddle));
+        //computerPaddle.isBot = true;
+        //computerPaddle.setMovementDirection(0f);
+        //computerPaddle.setPosition(MyGame.width * 0.985f, MyGame.height * 0.5f);
         //ball = new Ball(new Image(R.drawable.ball));
         ball = Ball.getBall();
     }
 
     @Override
     public void draw(Canvas canvas, BoundingBox box) {
-        paddle.draw(canvas);
+        controlPaddle.draw(canvas);
         computerPaddle.draw(canvas);
         ball.draw(canvas);
     }
 
     @Override
     public void update(float dt) {
-        if (paddle.collides(ball)) {
-            ball.collide(dt, paddle);
+        if (controlPaddle.collides(ball)) {
+            ball.collide(dt, controlPaddle);
         }
         else if (computerPaddle.collides(ball)) {
             ball.collide(dt, computerPaddle);
         }
-        paddle.update(dt);
+        controlPaddle.update(dt);
         computerPaddle.update(dt);
         ball.update(dt);
         checkRoundOver();
@@ -54,12 +57,12 @@ public class PongGameLayer extends Layer {
     private void checkRoundOver(){
         int winningPlayer = ball.checkWinningPlayer();
         if (winningPlayer != 0) {
-            if (winningPlayer == 1) { paddle.winRound(); }
+            if (winningPlayer == 1) { controlPaddle.winRound(); }
             else { computerPaddle.winRound(); }
         }
     }
 
     public Paddle getPaddle() {
-        return paddle;
+        return controlPaddle;
     }
 }
