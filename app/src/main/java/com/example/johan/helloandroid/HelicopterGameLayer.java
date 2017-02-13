@@ -34,19 +34,16 @@ public class HelicopterGameLayer extends Layer {
 
     @Override
     public void update(float dt) {
-        checkCollisions();
         for (Helicopter helicopter : helicopters) {
+            checkCollisions(helicopter);
             helicopter.update(dt);
         }
     }
 
-    private void checkCollisions() {
-        for (Helicopter helicopter : helicopters) {
-            for (Helicopter helicopter1 : helicopters) {
-                if (helicopter != helicopter1 && helicopter.collides(helicopter1)) {
-                    helicopter.collide(helicopter1);
-                    //break;
-                }
+    private void checkCollisions(Helicopter helicopter) {
+        for (Helicopter helicopter1 : helicopters) {
+            if (helicopter != helicopter1 && helicopter.collides(helicopter1)) {
+                helicopter.collide(helicopter1);
             }
         }
     }

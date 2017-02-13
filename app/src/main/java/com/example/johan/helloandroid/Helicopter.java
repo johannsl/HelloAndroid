@@ -27,8 +27,7 @@ public class Helicopter extends Sprite {
 
     public Helicopter(Image image) {
         super(image);
-        //VELOCITY = (float)Math.random() * 300;
-        VELOCITY = 300;
+        VELOCITY = (float)Math.random() * 300 + 200;
         images = new Image[] {image, new Image(R.drawable.heli2), new Image(R.drawable.heli3),
                 new Image(R.drawable.heli4)};
         font = new Font(0, 0, 0, (MyGame.width * 0.04f), Typeface.SANS_SERIF, Typeface.NORMAL);
@@ -64,7 +63,7 @@ public class Helicopter extends Sprite {
     private void updateImage(float dt) {
         frameTimer += dt;
         if (frameTimer >= 0.1) {
-            setView((SpriteView)images[frame]);
+            setView(images[frame]);
             frameTimer = 0;
             frame = (frame + 1) % images.length;
         }
@@ -116,10 +115,14 @@ public class Helicopter extends Sprite {
     }
 
     public void collide(Helicopter helicopter) {
-        float[] retreatDirection = new float[] {-(helicopter.getX() - getX()) + getX(), -(helicopter.getY() - getY()) + getY()};
-        //float[] retreatDirection1 = new float[] {-(getX() - helicopter.getX()), -(getY() - helicopter.getY())};
-        setDirection(retreatDirection);
-        //helicopter.setDirection(retreatDirection1);
-        //setPosition(getX() + vector[0] * 100, getY() + vector[1] * 100);
+        float[] coordinates = new float[] {helicopter.getX(), helicopter.getY()};
+        setDirection(findRetreatDirection(coordinates));
+    }
+
+    private float[] findRetreatDirection(float[] coordinates) {
+        float temp = getX() - (coordinates[0] - getX());
+        coordinates[1] = getY() - (coordinates[1] - getY());
+        coordinates[0] = temp;
+        return coordinates;
     }
 }
