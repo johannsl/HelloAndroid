@@ -18,7 +18,7 @@ public class PongGameLayer extends Layer {
 
     private Paddle paddle;
     private Paddle computerPaddle;
-    private Ball ball;
+    private static Ball ball;
 
     public PongGameLayer() {
         paddle = new Paddle(new Image(R.drawable.paddle));
@@ -26,7 +26,8 @@ public class PongGameLayer extends Layer {
         computerPaddle.isBot = true;
         computerPaddle.setMovementDirection(0f);
         computerPaddle.setPosition(MyGame.width * 0.985f, MyGame.height * 0.5f);
-        ball = new Ball(new Image(R.drawable.ball));
+        //ball = new Ball(new Image(R.drawable.ball));
+        ball = Ball.getBall();
     }
 
     @Override

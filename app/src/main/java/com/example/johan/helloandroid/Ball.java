@@ -11,11 +11,13 @@ import sheep.graphics.Image;
 
 public class Ball extends Sprite {
 
+    private static final Ball BALL = new Ball(new Image(R.drawable.ball));
+
     private float velocity;
     private float[] vector;
     private float crashTimer;
 
-    public Ball(Image image) {
+    private Ball(Image image) {
         super(image);
         velocity = 400f;
         vector = new float[] {-1f, 0f};
@@ -72,6 +74,10 @@ public class Ball extends Sprite {
         setPosition(MyGame.width * 0.5f, MyGame.height * 0.5f);
         vector = new float[] {-1f, 0f};
         crashTimer = 0f;
+    }
+
+    public static Ball getBall() {
+        return BALL;
     }
 
 }
